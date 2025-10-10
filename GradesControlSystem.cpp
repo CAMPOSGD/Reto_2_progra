@@ -5,7 +5,8 @@ Programa que permite el registro de las N notas de los M alumnos, permite tambie
 Programa que mediante el uso de arreglos, matrices, ciclos repetitivos, realiza las funciones desarrolladas arriba.
 
 */
-
+#include <iomanip>    
+#include <algorithm> 
 #include <iostream>
 #include <string.h>
 
@@ -190,19 +191,61 @@ do{
                         }
                         cout<<endl<<endl;
                     }
-            break;
+case 'c':
+{
+    system("cls");
+    // Calcula promedios individuales y luego el promedio global de la clase.
+    // Nota: ya tienes float promedios[n] declarado arriba.
+    float sumaGlobal = 0.0f;
 
-            case 'c':
-                //Para Calcular el promedio global de la clase, es necesario calcular el promedio individual de cada uno de los alumnos, y finalmente calcular el promedio global
-                //Para el promedio individual, recuerde que se deben sumar las M notas coontenidas en cada una de las filas de la matriz y dividirlas entre M.
-                //Escriba el codigo necesario para realizarlo.
-            break;
+    cout << "Promedios individuales:\n";
+    cout << fixed << setprecision(2);
 
-            case 'd':
-                // //Para Calcular el promedio global de la clase, es necesario calcular el promedio individual de cada uno de los alumnos, y finalmente en base al promedio de cada uno de estos
-                // Se deberan ordenar de acuerdo a las notas para determinar cual de ellos son los 3 primeros lugares.
+    for (int i = 0; i < n; ++i) {
+        float suma = 0.0f;
+        for (int j = 0; j < m; ++j) {
+            suma += mi_arreglo[i][j];
+        }
+        promedios[i] = (m > 0) ? (suma / m) : 0.0f;
+        cout << nombres[i] << ": " << promedios[i] << "\n";
+        sumaGlobal += promedios[i];
+    }
 
-            break;
+    float promedioGlobal = (n > 0) ? (sumaGlobal / n) : 0.0f;
+    cout << "\nPromedio global de la clase: " << promedioGlobal << "\n\n";
+}
+break;
+
+       case 'd':
+{
+    system("clear");
+    // Recalcula promedios individuales para asegurar datos actualizados.
+    for (int i = 0; i < n; ++i) {
+        float suma = 0.0f;
+        for (int j = 0; j < m; ++j) suma += mi_arreglo[i][j];
+        promedios[i] = (m > 0) ? (suma / m) : 0.0f;
+    }
+
+    // Creamos un arreglo de indices para ordenar sin perder correspondencia con nombres/promedios.
+    int idx[n];
+    for (int i = 0; i < n; ++i) idx[i] = i;
+
+    // Ordenamos los indices por promedio descendente. 
+    std::sort(idx, idx + n, [&](int a, int b){
+        if (promedios[a] != promedios[b]) return promedios[a] > promedios[b];
+        return a < b; // desempate estable por orden de ingreso
+    });
+
+    int k = (n < 3) ? n : 3;
+    cout << "=== TOP " << k << " PROMEDIOS ===\n";
+    cout << fixed << setprecision(2);
+    for (int i = 0; i < k; ++i) {
+        int p = idx[i];
+        cout << (i+1) << ") " << nombres[p] << " - Promedio: " << promedios[p] << "\n";
+    }
+    cout << "===========================\n\n";
+}
+break;
 
             case 'e':
                     system("exit");
