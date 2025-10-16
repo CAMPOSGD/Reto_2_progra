@@ -1,9 +1,20 @@
+/* 
+Materia:
+    Programación estructurada. 
+
+Devs: 
+    1. Francisco Alexander Rivera Gómez. 
+    2. Kevin Vladimir Carranza Barrera
+    3. Gabriel de Jesús Campos Romero.
+
+Facilitador:
+    Mg. Felipe Benjamín Acosta Coto.
+*/
+
+
 /*
-
 Programa que permite el registro de las N notas de los M alumnos, permite tambien la busqueda de un registro en especifico.
-
 Programa que mediante el uso de arreglos, matrices, ciclos repetitivos, realiza las funciones desarrolladas arriba.
-
 */
 #include <iomanip>    
 #include <algorithm> 
