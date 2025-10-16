@@ -34,7 +34,7 @@ int main()
             string nombres[n]; //Arreglo de N posiciones que estara destinado para que se almecenen los nombres de cada uno de los alumnos
             float promedios[n]; //Arreglo de N posiciones que podra almacenar los promedios de cada uno de los alumnos
             float mi_arreglo[n][m];//Matriz de N filas (Una para cada alumno) y de M columnas (Una para cada una de las notas)
-            system("clear");
+            system("cls"); // Cambiamos esto porque usamos W y no Linux
             /*
             Se inicia el llenado de los datos, cada vez que se ejecute el ciclo externo, se registrara el nombre del alumno
             dentro del arreglo nombres[n] y tambien se van a llenar los datos de cada fila.
@@ -120,7 +120,7 @@ int main()
                     cout<<"Ingrese la nota ["<<j+1<<"] del alumno ["<<i+1<<"] ("<<nombres[i]<<") : ";
                     cin>>mi_arreglo[i][j]; //Para cada una de las filas, se inicia la captura de datos de manera que, solamente se ingresen las notas
                 }
-                system("clear");
+                system("cls"); // Cambiamos esto porque usamos W y no Linux
             }
             cout<<"Se ha terminado el ingreso de los alumnos y sus notas."<<endl<<endl;
             //Se finaliza el ciclo para el llenado de datos
@@ -136,7 +136,7 @@ do{
         switch(menu)
         {
             case 'a':
-                system("clear");
+                system("cls");
                 //Ciclo necesario para la busqueda de las notas
                 do{
                       //Proceso para la busqueda de notas de un alumno en especifico
@@ -170,12 +170,12 @@ do{
                     }
                     cout<<"Si desea consultar otro registro presione cualquier tecla, de lo contrario, la tecla N o n...";
                     cin>>resp;//Captura de variable para verificar la continuacion
-                    system("clear");
+                    system("cls");
                 }while(resp !='n' && resp!='N');
             break;
 
             case 'b':
-                    system("clear");
+                    system("cls");
                     /*
                     Proceso para mostrar las notas de los alumnos registrados, note que para emular el funcionamiento, lo que se hace es
                     recorrer el arreglo de la misma forma que en el llenado, con la diferencia, que, ahora, lo que se hace es mostrar el valor
@@ -194,52 +194,48 @@ do{
 case 'c':
 {
     system("cls");
-    // Calcula promedios individuales y luego el promedio global de la clase.
-    // Nota: ya tienes float promedios[n] declarado arriba.
-    float sumaGlobal = 0.0f;
+    float sumaGlobal = 0.0f; // Variable para acumular la suma de los promedios individuales
 
-    cout << "Promedios individuales:\n";
+    cout << "Promedios individuales:\n"; 
     cout << fixed << setprecision(2);
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {  // Calculo del promedio individual
         float suma = 0.0f;
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; ++j) { // Suma de las notas de alumnos
             suma += mi_arreglo[i][j];
         }
-        promedios[i] = (m > 0) ? (suma / m) : 0.0f;
-        cout << nombres[i] << ": " << promedios[i] << "\n";
-        sumaGlobal += promedios[i];
+        promedios[i] = (m > 0) ? (suma / m) : 0.0f; // Calculo del promedio individual
+        cout << nombres[i] << ": " << promedios[i] << "\n"; 
+        sumaGlobal += promedios[i]; // Acumula el promedio individual para el calculo del promedio global
     }
 
-    float promedioGlobal = (n > 0) ? (sumaGlobal / n) : 0.0f;
+    float promedioGlobal = (n > 0) ? (sumaGlobal / n) : 0.0f; // Calcula el promedio global
     cout << "\nPromedio global de la clase: " << promedioGlobal << "\n\n";
 }
 break;
 
        case 'd':
 {
-    system("clear");
-    // Recalcula promedios individuales para asegurar datos actualizados.
-    for (int i = 0; i < n; ++i) {
+    system("cls");
+
+    for (int i = 0; i < n; ++i) { 
         float suma = 0.0f;
-        for (int j = 0; j < m; ++j) suma += mi_arreglo[i][j];
-        promedios[i] = (m > 0) ? (suma / m) : 0.0f;
+        for (int j = 0; j < m; ++j) suma += mi_arreglo[i][j]; // Suma notas de los alumnos
+        promedios[i] = (m > 0) ? (suma / m) : 0.0f; // Calcula el promedio individual
     }
 
-    // Creamos un arreglo de indices para ordenar sin perder correspondencia con nombres/promedios.
     int idx[n];
-    for (int i = 0; i < n; ++i) idx[i] = i;
+    for (int i = 0; i < n; ++i) idx[i] = i; // Inicializa el arreglo de indices para clasificacion de alumnos
 
-    // Ordenamos los indices por promedio descendente. 
     std::sort(idx, idx + n, [&](int a, int b){
-        if (promedios[a] != promedios[b]) return promedios[a] > promedios[b];
-        return a < b; // desempate estable por orden de ingreso
+        if (promedios[a] != promedios[b]) return promedios[a] > promedios[b]; // Ordena por promedio descendente
+        return a < b;
     });
 
-    int k = (n < 3) ? n : 3;
-    cout << "=== TOP " << k << " PROMEDIOS ===\n";
+    int k = (n < 3) ? n : 3; // Determina cuantos alumnos mostrar (maximo 3)
+    cout << "=== TOP " << k << " PROMEDIOS ===\n"; 
     cout << fixed << setprecision(2);
-    for (int i = 0; i < k; ++i) {
+    for (int i = 0; i < k; ++i) { // Muestra los k mejores promedios
         int p = idx[i];
         cout << (i+1) << ") " << nombres[p] << " - Promedio: " << promedios[p] << "\n";
     }
@@ -258,7 +254,7 @@ break;
         }
         cout<<"Desea realizar otra operacion? Presione Cualquier Tecla, Salir presione n o N."<<endl;
         cin>>continuar;
-        system("clear");
+        system("cls");
     }while(continuar!='n' && continuar!='N');
     cout<<"Gracias por utilizar el sistema..."<<endl<<endl;
     return 0;
